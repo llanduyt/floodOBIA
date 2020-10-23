@@ -174,7 +174,7 @@ def tile_vars(image, selection='Martinis', t_method=['KI', 'Otsu'], tile_dim=[20
     else:
         return tile_ki, tileO, average, stdev, None # Modify this line to include other selection methods!
 
-def tiled_thresholding(image, selection='Martinis', t_method=['KI', 'Otsu'], tile_dim=[200, 200], final_n=5, hand_matrix=None, hand_t=100, directory_figure=None, incomplete_tile_warning=True):
+def tiled_thresholding(image, selection='Martinis', t_method=['KI', 'Otsu'], tile_dim=[200, 200], n_final=5, hand_matrix=None, hand_t=100, directory_figure=None, incomplete_tile_warning=True):
     """ Apply tiled thresholding
     
     Inputs:
@@ -186,7 +186,7 @@ def tiled_thresholding(image, selection='Martinis', t_method=['KI', 'Otsu'], til
         List of thresholds to calculate. Should contain one or both of "KI", "Otsu".
     tile_dim: list (default=[200, 200])
         Dimension of tiles.
-    final_n: int (default=5)
+    n_final: int (default=5)
         Number of tiles to select.
     hand_matrix: ndarray or None (default=None)
         Array of HAND values.
@@ -226,8 +226,8 @@ def tiled_thresholding(image, selection='Martinis', t_method=['KI', 'Otsu'], til
     sorted_indices = np.argsort(stdev[i_r, i_c])[::-1]
     i_r = i_r[sorted_indices]
     i_c = i_c[sorted_indices]
-    if i_r.size > final_n:
-        tile_selection = [i_r[:final_n], i_c[:final_n]]
+    if i_r.size > n_final:
+        tile_selection = [i_r[:n_final], i_c[:n_final]]
     else:
         tile_selection = [i_r, i_c]
     if directory_figure: 
@@ -330,7 +330,7 @@ def show_thresholds(image, t, t_labels=("KI", "Otsu")):
     _ = fig.legend(tuple(ps), t_labels, 'upper right', framealpha=1)
     return fig, ax
 
-def calc_tdict(band_names, sar_image=None, segments=None, thresh_file=None, directory_figure=None, source=['pixels', 'segments'], approach=['tiled', 'global'], t_method=['KI', 'Otsu'], tile_dim=[200, 200], final_n=5, hand_matrix=None, hand_t=100):
+def calc_tdict(band_names, sar_image=None, segments=None, thresh_file=None, directory_figure=None, source=['pixels', 'segments'], approach=['tiled', 'global'], t_method=['KI', 'Otsu'], tile_dim=[200, 200], n_final=5, hand_matrix=None, hand_t=100):
     """ Caluclate thresholds for sar_image bands and/or segments, and save to dict
     
     Inputs:
@@ -356,7 +356,7 @@ def calc_tdict(band_names, sar_image=None, segments=None, thresh_file=None, dire
         List of thresholds to calculate. Should contain one or both of "KI", "Otsu".
     tile_dim: list (default=[200, 200])
         Dimension of tiles.
-    final_n: int (default=5)
+    n_final: int (default=5)
         Number of tiles to select.
     hand_matrix: ndarray or None (default=None)
         Array of HAND values.
@@ -379,7 +379,7 @@ def calc_tdict(band_names, sar_image=None, segments=None, thresh_file=None, dire
                     t_dict[source_value][approach_value]['Otsu'] = {}
                 if approach_value == 'tiled':
                     for ib, band in enumerate(band_names):
-                            t_values, _ = tiled_thresholding(sar_image[ib], selection='Martinis', t_method=['KI', 'Otsu'], tile_dim=tile_dim, final_n=final_n, hand_matrix=hand_matrix, hand_t=hand_t, directory_figure=directory_figure, incomplete_tile_warning=True)
+                            t_values, _ = tiled_thresholding(sar_image[ib], selection='Martinis', t_method=['KI', 'Otsu'], tile_dim=tile_dim, n_final=n_final, hand_matrix=hand_matrix, hand_t=hand_t, directory_figure=directory_figure, incomplete_tile_warning=True)
                             if "KI" in t_method:
                                 t_dict[source_value][approach_value]['KI'][band] = t_values[0]
                             if "Otsu" in t_method:

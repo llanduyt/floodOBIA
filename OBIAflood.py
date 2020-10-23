@@ -262,7 +262,7 @@ print("{} - Threshold selection...".format(datetime.datetime.now()))
 t_start = datetime.datetime.now()
 bandnames_threshold = ["fVV", "fVH"]
 bandnames_threshold_index = [image_sar_bandnames.index(el) for el in bandnames_threshold]
-t_all = ttf.calc_tdict(bandnames_threshold, sar_image=image_sar[bandnames_threshold_index], source=["pixels"], approach=["tiled"], Tmethod=["KI"], tileDim=[200, 200], N=5, directory_figure=directory_output)
+t_all = ttf.calc_tdict(bandnames_threshold, sar_image=image_sar[bandnames_threshold_index], source=["pixels"], approach=["tiled"], t_method=["KI"], tile_dim=[200, 200], n_final=5, directory_figure=directory_output)
 t_vv = t_all["pixels"]["tiled"]["KI"]["fVV"]
 t_vh = t_all["pixels"]["tiled"]["KI"]["fVH"]
 print("KI threshold for VV and VH: ({}, {})".format(t_vv, t_vh))
