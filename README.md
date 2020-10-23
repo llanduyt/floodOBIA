@@ -30,7 +30,7 @@ The main input files are:
 - LC of the ROI. The code assumes Copernicus GLS land cover codes.
 
 #### Output
-The resulting classification is saved both as a .shp and a .tif file. In the .shp, the attribute "model" contains the final classification. In the final classification, the follow classes (with label) are present: 
+The resulting classification is saved both as a .shp and a .tif file. In the .shp, the attribute "model" contains the final classification. In the final classification, the following classes (with label) are present: 
 - 0 = dry land (DL)
 - 1 = permanent water (PW)
 - 2 = open flooding (OF)
