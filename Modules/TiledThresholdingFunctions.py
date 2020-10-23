@@ -421,7 +421,7 @@ def calc_tdict(band_names, sar_image=None, segments=None, thresh_file=None, dire
                 leglabels.append("h segments")
                 xmin.append(np.min(segments[band]))
                 xmax.append(np.max(segments[band]))
-            if sar_image:
+            if sar_image is not None:
                 h, bins = np.histogram(sar_image[band_names.index(band)].ravel(), bins=200, density=True)
                 g = np.arange(bins[0]+(bins[1]-bins[0])/2, bins[-1], (bins[1]-bins[0]))
                 leghandles.append(ax.plot(g, h, color='lightblue')[0])
