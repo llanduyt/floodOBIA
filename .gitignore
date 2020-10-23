@@ -17,6 +17,7 @@ __pycache__/
 
 # Output files #
 ################
+Input_Fergus/
 Output_Fergus/
 Output_Sava/
 Output_Shannon/

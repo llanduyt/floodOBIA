@@ -1,0 +1,31 @@
+variable,value,description
+directory_modules,./Modules,path to Modules folder
+directory_input,../Input_Fergus,path to input folder
+directory_output,./Output_Fergus,path to output folder
+sar_filename,Fergus2015_SAR_UTM_S5.tif,filename of sar image (stored in directory_input)
+optical_filename,S2_CFC_Fergus_20160901_20161201_nanfilled.tif,filename of optical image (stored in directory_input)
+dem_filename,Fergus_DEM.tif,filename of DEM (stored in directory_input)
+lc_filename,Fergus_LC_10m.tif,filename of land cover product (stored in directory_input)
+truth_filename,Fergus2015_validation_012.tif,filename of raster containing truth values (stored in directory_input)
+parallel_processing,True,whether to activate parallel processing
+num_processes,4,number of processes to open in parallel
+save_intermediate,True,whether to save intermediate results
+ratio,1,ratio between color- and image-space proximity for image segmentation (higher gives more weight to color-space)
+maxdist,4,max. distance for merging of pixel and nearest neighbor with higher intensity in image segmentation
+kernel_window_size,7,kernel size for density estimation in image segmentation
+t_stdev,1,fraction of st.dev. between pixel and neigbours used to select similar neighbours for object refinement
+t_conv,10,max. number of mergers allowed for convergence of object refinement
+t_shape,12,shape threshold for object refinement (eq. 3 of manuscript) 
+nodata_value,-9999,nodata value for feature extraction
+tile_size,500,size of tiles (px) for parallel object refinement
+feature_space,SARwCopt_mean,a list (string with elements separated by space) of band names or a string referring to a combination of subspaces (see ClusteringFunctions.py)
+num_clusters,10,number of clusters for k-means clustering
+t_incvv,3,threshold for inc_VV (FV classification)
+t_incr,3,threshold for inc_R (FV classification)
+t_incvv_rg,3,threshold for inc_VV (FV region growing)
+t_incr_rg,3,threshold for inc_R (FV region growing)
+include_singlepol,True,whether to include objects satisfying VV or VH condition (OF region growing)
+frac_neighbours,0.5,minimal fraction of flooded neighbours (DEM region growing)
+t_dem,min,statistic of DEM flooded neighbours (DEM region growing)
+mmu,10,minimal mapping unit (px)
+lc_types,all,land cover types to flag as forest ("all" or "open" or "closed" or list of CGLS land cover types)
