@@ -189,8 +189,8 @@ def flag_forests(segments, lc_types="all", model_field="model", forest_field="fo
     segments.loc[segments["LC_main"].isin(lc_types), forest_field] = True
     segments_forest_dry = segments.loc[(segments[forest_field]) & (segments[model_field] == 0)]
     # Update model field selected segments
-    print("'Dry' forest objects detected: {}, ".format(len(segments_forest_dry)))
-    segments.loc[segments_forest_dry.index, model_field] = True
+    print("'Dry' forest objects detected: {}".format(len(segments_forest_dry)))
+    segments.loc[segments_forest_dry.index, model_field] = 5
     # Save updated model output
     if output_filename:
         print("{} - Saving output of forest-flagging to {}".format(datetime.datetime.now(), output_filename))

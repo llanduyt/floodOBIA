@@ -345,12 +345,13 @@ if truth_filename:
         segments[band_label] = [el[s] for el in statistics]
         # Calculate accuracy
         segments = segments[segments["truth"] != -1] # remove segments for which we do not know truth
+        segments.loc[segments["model"] == 5, "model"] = 0 # low lying considered as wet
         segments.loc[segments["model"] == 4, "model"] = 2 # low lying considered as wet
         segments.loc[segments["model"] == 3, "model"] = 2 # FV considered as wet
         segments.loc[segments["truth"] == 3, "truth"] = 2 # FV considered as wet
         segments.loc[segments["truth"] == 4, "truth"] = 0 # forest considered as dry
         acc = af.calculate_metrics(segments["truth"], segments["model"], average="macro")
-        acc_nf = af.calculate_metrics(segments.loc[~segments["model"] == 5, "truth"], segments.loc[~segments["model"] == 5, "model"], average="macro")
+        acc_nf = af.calculate_metrics(segments.loc[~segments["forested"], "truth"], segments.loc[~segments["forested"], "model"], average="macro")
         print("Accuracy with forest segments: ", acc)    
         print("Accuracy without forest segments: ", acc_nf)
     else: 
