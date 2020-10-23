@@ -37,6 +37,8 @@ bandnames_stdev = ["rVV_std", "rVH_std", "fVV_std", "fVH_std"]
 # Case specific settings
 directory_input = os.path.realpath(settings["directory_input"])
 directory_output = os.path.realpath(settings["directory_output"])
+if not os.path.exists(directory_output):
+    os.mkdir(directory_output)
 sar_filename = os.path.join(directory_input, settings["sar_filename"])
 optical_filename = os.path.join(directory_input, settings["optical_filename"])
 dem_filename = os.path.join(directory_input, settings["dem_filename"])
