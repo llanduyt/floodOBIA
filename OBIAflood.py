@@ -314,7 +314,7 @@ if save_intermediate:
     save_topickle(segments, os.path.join(directory_output, "Segments_FE_no1_OR_FE_CC_PP.pkl"))
 
 print("{} - FF".format(datetime.datetime.now()))
-segments = ppf.flag_forests(segments, lc_types="all", forest_field="forested", output_filename=None)
+segments = ppf.flag_forests(segments, lc_types="all", model_field="model", forest_field="forested", output_filename=None)
 t_end = datetime.datetime.now()
 comp_time = (t_end - t_start).total_seconds()
 print("{} - Post-processing finished after {} sec!".format(datetime.datetime.now(), comp_time))
@@ -350,7 +350,7 @@ if truth_filename:
         segments.loc[segments["truth"] == 3, "truth"] = 2 # FV considered as wet
         segments.loc[segments["truth"] == 4, "truth"] = 0 # forest considered as dry
         acc = af.calculate_metrics(segments["truth"], segments["model"], average="macro")
-        acc_nf = af.calculate_metrics(segments.loc[~segments["forested"], "truth"], segments.loc[~segments["forested"], "model"], average="macro")
+        acc_nf = af.calculate_metrics(segments.loc[~segments["model"] == 5, "truth"], segments.loc[~segments["model"] == 5, "model"], average="macro")
         print("Accuracy with forest segments: ", acc)    
         print("Accuracy without forest segments: ", acc_nf)
     else: 

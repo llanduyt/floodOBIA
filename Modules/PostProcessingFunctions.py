@@ -155,7 +155,7 @@ def apply_mmu(segments, model_field="model", mmu=20, image_pixel_size=100, outpu
     return segments
 
 
-def flag_forests(segments, lc_types="all", forest_field="forested", output_filename=None):
+def flag_forests(segments, lc_types="all", model_field="model", forest_field="forested", output_filename=None):
     """Flag forest segments
     
     Inputs:
@@ -164,7 +164,9 @@ def flag_forests(segments, lc_types="all", forest_field="forested", output_filen
     lc_types: str or list (default="all")
         List of CGLS forest types or one of "all", "closed" or "open", referring to all, only closed and only open forest.
     model_field: str (default="forested")
-        Name of column that stores the information on forest cover.
+        Name of column that stores the classification.
+    forest_field: str (default="forested")
+        Name of column that will store the information on forest cover.
     output_filename: str or None (default=None)
         If not None, output is pickled to specified path.
     Ouputs:
@@ -184,15 +186,16 @@ def flag_forests(segments, lc_types="all", forest_field="forested", output_filen
         print('Error! lc_types should be of type list or equal to "all", "open" or closed". Now {}. Switching to default "all".'.format(lc_types))
         lc_types = list(np.arange(111,117)) + list(np.arange(121,127))
     # Select dry segments that have suited LC type
-    segments_forest = segments.loc[segments["LC_main"].isin(lc_types)]
+    segments.loc[segments["LC_main"].isin(lc_types), forest_field] = True
+    segments_forest_dry = segments.loc[(segments[forest_field]) & (segments[model_field] == 0)]
     # Update model field selected segments
-    print("Forest objects detected: {}, ".format(len(segments_forest)))
-    segments.loc[segments_forest.index, forest_field] = True
+    print("'Dry' forest objects detected: {}, ".format(len(segments_forest_dry)))
+    segments.loc[segments_forest_dry.index, model_field] = True
     # Save updated model output
     if output_filename:
         print("{} - Saving output of forest-flagging to {}".format(datetime.datetime.now(), output_filename))
         with open(output_filename, "wb") as handle:
-            pickle.dump(segments[forest_field], handle)
+            pickle.dump(segments[[model_field, forest_field]], handle)
     # Return
     return segments
                 
