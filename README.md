@@ -19,3 +19,21 @@ scikit-image 0.17.1
 ### Run the code
 The main file is OBIAflood.py. This script requires the path to a .csv file specifying the settings as an argument. 
 An example settings file, Settings.csv, is included.
+
+#### Input
+A description of all parameters is given in the third column of Settings.csv
+
+The main input files are:
+- A stack of 2 SAR images, both in VV and VH polarization. The following band order is assumed: reference_VH, reference_VV, flood_VH, flood_VV.
+- A stack of optical bands (cloudfree image or composite). The following band order is assumed: B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12.
+- DEM of the ROI. In the paper, the hydrologically conditioned SRTM DEM was used.
+- LC of the ROI. The code assumes Copernicus GLS land cover codes.
+
+#### Output
+The resulting classification is saved both as a .shp and a .tif file. In the .shp, the attribute "model" contains the final classification. In the final classification, the follow classes (with label) are present: 
+- 0 = dry land (DL)
+- 1 = permanent water (PW)
+- 2 = open flooding (OF)
+- 3 = flooded vegetation (FV)
+- 4 = low-lying areas considered as OF
+- 5 = forests possibly hiding flood
