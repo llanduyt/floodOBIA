@@ -5,6 +5,8 @@ This repository contains the source codes used in the following publication:
 
 Landuyt et al., (in review). "Flood mapping in vegetated areas using an unsupervised clustering approach on Sentinel-1 and -2 imagery". Remote Sensing.
 
+The code itself can be referenced by the following DOI: [![DOI](https://zenodo.org/badge/306652567.svg)](https://zenodo.org/badge/latestdoi/306652567)
+
 ### Prerequisites
 This repository is mainly built using the following packages:
 ```
