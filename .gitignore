@@ -1,0 +1,27 @@
+# Compuation files #
+####################
+*.e[0-9]*
+*.o[0-9]*
+*.run[0-9]*
+*.log[0-9]*
+*.pbs[0-9]*
+*.sh[0-9]*
+core.[0-9]*
+.worker*
+*.out
+*.sh
+
+# Python cache #
+################
+__pycache__/
+
+# Output files #
+################
+Output_Fergus/
+Output_Sava/
+Output_Shannon/
+Output_Volta/
+
+# Case specific settings #
+##########################
+Settings_*.csv
