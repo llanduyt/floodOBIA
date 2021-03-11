@@ -3,7 +3,7 @@ An object-based clustering approach for SAR-based flood mapping.
 
 This repository contains the source codes used in the following publication:
 
-Landuyt et al., (in review). "Flood mapping in vegetated areas using an unsupervised clustering approach on Sentinel-1 and -2 imagery". Remote Sensing.
+Landuyt et al., 2020. "Flood mapping in vegetated areas using an unsupervised clustering approach on Sentinel-1 and -2 imagery". Remote Sensing.
 
 The code itself can be referenced by the following DOI: [![DOI](https://zenodo.org/badge/306652567.svg)](https://zenodo.org/badge/latestdoi/306652567)
 
